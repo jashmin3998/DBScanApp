@@ -12,5 +12,11 @@ public class ClickListener extends MouseAdapter {
 	      this.grid = grid;
 	   }
 
-	  
+	   @Override
+	   public void mousePressed(MouseEvent e) {
+	      if (e.getButton() == MouseEvent.BUTTON1) {
+	    	  grid.labelPressed((JLabel)e.getSource());
+	      } 
+	      
+	   }
 }
