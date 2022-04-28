@@ -34,7 +34,19 @@ public class App {
       frame.pack();
       frame.setLocationByPlatform(true);
       
-      
+      ManageDots md = new ManageDots();
+      Button saveButton = new Button("Save");
+      saveButton.setActionCommand("onSaveButtonClick");
+      saveButton.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			md.saveSelectedDots(mainPanel.getSelectedDots());
+			System.out.println("Save button Clicked");
+		}
+      });
+      saveButton.setBackground(Color.BLUE);
+      menuBar.add(saveButton);
       frame.setVisible(true);
    }
 
