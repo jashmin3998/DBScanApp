@@ -50,7 +50,7 @@ public Grid(int rows, int cols, int cellWidth) {
 	      return cells;
 	   }
 
-   public void labelPressed(JLabel label) {
+   public void onDotClick(JLabel label) {
 	   for (int row = 0; row < myLabels.length; row++) {
 	       for (int col = 0; col < myLabels[row].length; col++) {
 	    	   
@@ -80,7 +80,41 @@ public Grid(int rows, int cols, int cellWidth) {
 	      
    }
    
+   public void displaySavedDots() {
+	   for(int i = 0 ; i < this.selectedDots.size(); i++) {
+		   
+		   int row = this.selectedDots.get(i)[0];
+		   int col = this.selectedDots.get(i)[1];
+		   CellStatus myColor = cells[row][col].RED;
+           cells[row][col] = myColor;
+           myLabels[row][col].setBackground(myColor.getColor());
+	      }
+   }
    
+   public void cleanScreen() {
+	   for(int i = 0 ; i < this.selectedDots.size(); i++) {   
+		   int row = this.selectedDots.get(i)[0];
+		   int col = this.selectedDots.get(i)[1];
+		   CellStatus myColor = cells[row][col].BLACK;
+           cells[row][col] = myColor;
+           myLabels[row][col].setBackground(myColor.getColor());
+	      }
+	   	this.setSelectedDots(new ArrayList<Integer[]>());
+   }
    
+   public void changeColor(int row, int col) {
+	   CellStatus myColor = cells[row][col].BLUE;
+       cells[row][col] = myColor;
+       myLabels[row][col].setBackground(myColor.getColor());
+   }
+   
+   public String[] dropDownValues() {
+	   String[] str = new String[this.selectedDots.size()];
+	   
+	   for(int i = 0 ; i < this.selectedDots.size(); i++) {
+		   str[i] = i +")"+ Integer.toString(this.selectedDots.get(i)[0]) + "," + Integer.toString(this.selectedDots.get(i)[1]);
+	   }
+	   return str;
+   }
    
 }
