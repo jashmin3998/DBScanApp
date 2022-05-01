@@ -33,6 +33,67 @@ public class App {
       frame.getContentPane().add(mainPanel);
       frame.pack();
       frame.setLocationByPlatform(true);
+	  
+	  ManageDots md = new ManageDots();
+      
+      //Save Button
+      Button saveButton = new Button("Save");
+      saveButton.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			md.saveSelectedDots(mainPanel.getSelectedDots());
+			System.out.println("Save button Clicked");
+		}
+      });
+      saveButton.setBackground(Color.BLUE);
+      menuBar.add(saveButton);
+      
+      
+      //Load Button
+      Button loadButton = new Button("Load");
+      loadButton.addActionListener(new ActionListener() {
+  		@Override
+  		public void actionPerformed(ActionEvent e) {
+  			// TODO Auto-generated method stubloadSavedDots
+  			System.out.println("Load button Clicked");
+  			
+  			mainPanel.cleanScreen();
+  			mainPanel.setSelectedDots(md.loadSavedDots());
+  			mainPanel.displaySavedDots();
+  		}
+        });
+      loadButton.setBackground(Color.YELLOW);
+      menuBar.add(loadButton);
+      
+      
+      //Reset Button
+      Button resetButton = new Button("Reset");
+      resetButton.addActionListener(new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			
+    			mainPanel.cleanScreen();
+    		}
+         });
+      resetButton.setBackground(Color.RED);
+      menuBar.add(resetButton);
+      
+      
+      //Random Button
+      Button randomButton = new Button("Random");
+      randomButton.addActionListener(new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+
+    			mainPanel.cleanScreen();
+    			mainPanel.setSelectedDots(md.getRandomDots());
+    			mainPanel.displaySavedDots();
+    			
+    		}
+         });
+      randomButton.setBackground(Color.CYAN);
+      menuBar.add(randomButton);
       
       
       frame.setVisible(true);
