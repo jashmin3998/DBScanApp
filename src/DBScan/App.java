@@ -65,6 +65,23 @@ public class App extends JPanel{
       
       
       //Start Button
+      Button startButton = new Button("Start");
+      startButton.addActionListener(new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			
+    			int[] arr = createPopup(mainPanel.dropDownValues());
+
+    			DBScanImpl db = new DBScanImpl();
+    			try {
+					db.onStartClick(mainPanel, arr);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+    		}
+         });
+      startButton.setBackground(Color.GREEN);
+      menuBar.add(startButton);
       
       
       //Reset Button
@@ -101,7 +118,39 @@ public class App extends JPanel{
       frame.setVisible(true);
    }
    
-  
+   public static int[] createPopup(String str[]) {
+	   
+	   int[] arr = new int[2];
+	   
+	   Frame jFrame = new JFrame();
+       String dist = JOptionPane.showInputDialog(jFrame, "Enter Distance");
+       
+       arr[0] = Integer.parseInt(dist);
+       
+       if(arr[0] < 0) {
+    	   JOptionPane.showMessageDialog(jFrame, "Distance Can not be negative");
+    	   createPopup(str);
+       }
+     
+       String getFirstDot = (String) JOptionPane.showInputDialog(
+               null,
+               "Which is the starting dot?",
+               "Choose cordinates",
+               JOptionPane.QUESTION_MESSAGE,
+               null,
+               str,
+               null);
+       
+       if(getFirstDot == null || getFirstDot.length() < 1) {
+    	   JOptionPane.showMessageDialog(jFrame, "Please select distance and FirstDot");
+    	   createPopup(str);
+       }
+       
+       arr[1] = Integer.parseInt(getFirstDot.split("\\)")[0]);
+       
+       return arr;
+       
+	}
    
    
 

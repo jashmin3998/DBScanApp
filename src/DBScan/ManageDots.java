@@ -37,6 +37,26 @@ public class ManageDots {
 		    }
 	}
 	
+	public ArrayList<Integer[]> loadSavedDots(){
+		
+		ArrayList<Integer[]> list = new ArrayList<>();
+		try {
+		      File myObj = new File("selectedDots.txt");
+		      Scanner myReader = new Scanner(myObj);
+		      while (myReader.hasNextLine()) {
+		        String data = myReader.nextLine();
+		        String[] str = data.split(",");
+		        Integer[] temp = {Integer.parseInt(str[0]), Integer.parseInt(str[1])};
+		        list.add(temp);
+		      }
+		      myReader.close();
+		    } catch (FileNotFoundException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
+		
+		return list;
+	}
 	
 	public ArrayList<Integer[]> getRandomDots(){
 		ArrayList<Integer[]> list = new ArrayList<>();
